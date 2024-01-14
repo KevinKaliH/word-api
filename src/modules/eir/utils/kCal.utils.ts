@@ -1,0 +1,31 @@
+export const Header_Titles = [
+  "AREA SUJETA A EVALUACIÓN:",
+  "PUESTOS DE TRABAJO A EVALUAR:",
+  "Sentado (0.3)",
+  "De pie (0.6)",
+  "Andando (2-3)",
+  "Subir Pend (0.8*m)",
+  "Trabajo Manual (0.2-1.2)",
+  "1 Brazos (0.7-2.5)",
+  "2 Brazos (1-3.5)",
+  "Todo cuerpo (2.5-15)",
+  "Metabolismo basal (1.1)",
+  "Σ Kcal/hras",
+  "TIPO DE TRABAJO",
+];
+
+export const Content_Keys = [
+  "kcalArea",
+  "kcalPuesto",
+  "kcalSentado",
+  "kcalDepie",
+  "kcalAndando",
+  "kcalSubPend",
+  "kcalTrabMan",
+  "kcal1Brazo",
+  "kcal2Brazo",
+  "kcalTodoCuerpo",
+  "kcalMetBasal",
+  "kcal",
+  "TipoTrabajo",
+];
