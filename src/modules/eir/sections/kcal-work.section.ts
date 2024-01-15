@@ -108,6 +108,13 @@ export function determinateAreasKCalSection(dataObject: any) {
             type: typeWidth,
           },
           verticalAlign: VerticalAlign.CENTER,
+          shading: ["kcal", "TipoTrabajo"].includes(Content_Keys[i])
+            ? {
+                fill: "ccaf5e",
+                type: ShadingType.SOLID,
+                color: "auto",
+              }
+            : undefined,
         })
       );
     }
