@@ -20,13 +20,11 @@ export function determinateAreasKCalSection(dataObject: any) {
 
   const titleSection = new Paragraph({
     children: [
-      new PageBreak(),
       new TextRun({
         text: "DETERMINACIÓN DE AREAS Y PUESTOS DE TRABAJO Y CARGA METABOLICA\n\n",
         bold: true,
         break: 1,
       }),
-      new PageBreak(),
     ],
     alignment: AlignmentType.CENTER,
   });
@@ -136,5 +134,9 @@ export function determinateAreasKCalSection(dataObject: any) {
     ],
   });
 
-  return [titleSection, tableSection];
+  return [
+    titleSection,
+    new Paragraph({ children: [new TextRun({ text: "", break: 1 })] }),
+    tableSection,
+  ];
 }

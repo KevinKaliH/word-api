@@ -1,7 +1,7 @@
 import {
-  BorderStyle,
-  Header,
+  Footer,
   ImageRun,
+  PageNumber,
   Paragraph,
   Table,
   TableCell,
@@ -9,9 +9,12 @@ import {
   TextRun,
 } from "docx";
 import { readFileSync } from "fs";
+import { getValue } from "../../../utils/json.util";
 
-export function header() {
-  return new Header({
+export function footer(dataObject: any) {
+  const creator = getValue("Elaborador", dataObject);
+
+  return new Footer({
     children: [
       new Table({
         rows: [
@@ -22,23 +25,20 @@ export function header() {
                 verticalAlign: "center",
                 children: [
                   new Paragraph({
+                    alignment: "left",
                     children: [
-                      new ImageRun({
-                        data: readFileSync(
-                          "C:/Users/kalit/Documents/projects/word-api/src/assets/logo-header.png"
-                        ),
-                        transformation: { height: 80, width: 210 },
-                      }),
+                      new TextRun(`Informe Técnico Elaborado por:`),
+                      new TextRun({ text: creator, break: 1 }),
                     ],
                   }),
                 ],
                 borders: {
-                  bottom: {
+                  top: {
                     style: "thickThinLargeGap",
                     color: "auto",
                     size: 3,
                   },
-                  top: {
+                  bottom: {
                     style: "none",
                     size: 0,
                     color: "FFFFFF",
@@ -56,25 +56,24 @@ export function header() {
                 },
               }),
               new TableCell({
-                width: { size: 60, type: "pct" },
-                verticalAlign: "center",
+                width: { size: 20, type: "pct" },
                 children: [
                   new Paragraph({
-                    alignment: "center",
+                    alignment: "right",
                     children: [
                       new TextRun({
-                        text: "EVALUACIÓN INICIAL DE RIESGOS DE LA EMPRESA\nTROPIGAS DE NICARAGUA S.A., PLANTEL LEÓN",
+                        children: ["Página ", PageNumber.CURRENT],
                       }),
                     ],
                   }),
                 ],
                 borders: {
-                  bottom: {
+                  top: {
                     style: "thickThinLargeGap",
                     color: "auto",
                     size: 3,
                   },
-                  top: {
+                  bottom: {
                     style: "none",
                     size: 0,
                     color: "FFFFFF",
