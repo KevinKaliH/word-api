@@ -22,9 +22,11 @@ export function determinateAreasKCalSection(dataObject: any) {
     children: [
       new PageBreak(),
       new TextRun({
-        text: "DETERMINACIÓN DE AREAS Y PUESTOS DE TRABAJO Y CARGA METABOLICA",
+        text: "DETERMINACIÓN DE AREAS Y PUESTOS DE TRABAJO Y CARGA METABOLICA\n\n",
         bold: true,
+        break: 1,
       }),
+      new PageBreak(),
     ],
     alignment: AlignmentType.CENTER,
   });
@@ -105,7 +107,7 @@ export function determinateAreasKCalSection(dataObject: any) {
             size: widthItem,
             type: typeWidth,
           },
-          //   verticalAlign: VerticalAlign.CENTER,
+          verticalAlign: VerticalAlign.CENTER,
         })
       );
     }
