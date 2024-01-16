@@ -12,7 +12,13 @@ import { getValue } from "../../../utils/json.util";
 import {
   Header_Keys_Evaluation,
   Header_Title_Evaluation,
+  Object_Keys_Table,
+  SecondRowPartOne,
+  SecondRowPartTwo,
+  TableRowOne,
 } from "../utils/area-risk.utils";
+import { header } from "./header";
+import { footer } from "./footer";
 
 export function areaRiskProbabilitySection(dataObject: any): ISectionOptions[] {
   const data = getValue("REPETICION_POR_AREA", dataObject) as Array<any> | null;
@@ -21,14 +27,20 @@ export function areaRiskProbabilitySection(dataObject: any): ISectionOptions[] {
   const templateObjects: ISectionOptions[] = [];
 
   data.forEach((item) => {
-    templateObjects.push(generateHeader(item));
+    templateObjects.push(generateHeader(item, dataObject));
   });
 
   return templateObjects;
 }
 
-function generateHeader(data: any): ISectionOptions {
+function generateHeader(data: any, allDataObject: any): ISectionOptions {
   return {
+    headers: {
+      default: header(),
+    },
+    footers: {
+      default: footer(allDataObject),
+    },
     properties: {
       page: {
         size: {
@@ -41,9 +53,45 @@ function generateHeader(data: any): ISectionOptions {
         children: [new TextRun({ text: "EVALUACIÓN DE RIESGOS.", bold: true })],
         alignment: "center",
       }),
+      new Paragraph({
+        children: [new TextRun({ text: "\n", bold: true, break: 1 })],
+        alignment: "center",
+      }),
       headerDetail(data),
+      new Paragraph({
+        children: [new TextRun({ text: "\n", bold: true, break: 1 })],
+        alignment: "center",
+      }),
+      tableContent(data),
     ],
   };
+}
+
+function tableContent(data: any) {
+  const tableValues = data["FILA_RIESGO_AREA"] as Array<any>;
+
+  return new Table({
+    rows: [
+      new TableRow({
+        children: TableRowOne,
+      }),
+      new TableRow({
+        children: [...SecondRowPartOne, ...SecondRowPartTwo],
+      }),
+      ...tableValues.map(
+        (item) =>
+          new TableRow({
+            children: Object_Keys_Table.map((key) => {
+              let value = item[key];
+              if (key == "PORCENTAJE" && value)
+                value = (Number(value) * 100).toString();
+
+              return new TableCell({ children: [new Paragraph(value ?? "")] });
+            }),
+          })
+      ),
+    ],
+  });
 }
 
 function headerDetail(data: any) {
@@ -90,8 +138,8 @@ function headerDetail(data: any) {
             borders: {
               ...borders,
               right: {
-                style: BorderStyle.NONE,
-                size: 30,
+                style: BorderStyle.DASH_DOT_STROKED,
+                space: 5,
                 color: "FFFFFF",
               },
             },
