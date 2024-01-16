@@ -4,6 +4,7 @@ import { historicalSection } from "./sections/description-building.section";
 import { header } from "./sections/header";
 import { determinateAreasKCalSection } from "./sections/kcal-work.section";
 import { footer } from "./sections/footer";
+import { areaRiskProbabilitySection } from "./sections/area-risk-probability.section";
 
 export default class EirDocx {
   private data: any = undefined;
@@ -30,6 +31,7 @@ export default class EirDocx {
             ...determinateAreasKCalSection(this.data),
           ],
         },
+        ...areaRiskProbabilitySection(this.data),
       ],
     });
 
