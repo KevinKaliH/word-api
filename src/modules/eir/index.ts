@@ -5,6 +5,9 @@ import { header } from "./sections/header";
 import { determinateAreasKCalSection } from "./sections/kcal-work.section";
 import { footer } from "./sections/footer";
 import { areaRiskProbabilitySection } from "./sections/area-risk-probability.section";
+import { introductionSection } from "./sections/introduction.section";
+import { objectivesSection } from "./sections/objectives.section";
+import { configNumbering } from "./utils/config-docx";
 
 export default class EirDocx {
   private data: any = undefined;
@@ -27,12 +30,15 @@ export default class EirDocx {
             type: docx.SectionType.CONTINUOUS,
           },
           children: [
-            historicalSection(this.data),
+            ...introductionSection(),
+            ...objectivesSection(),
+            ...historicalSection(this.data),
             ...determinateAreasKCalSection(this.data),
           ],
         },
         ...areaRiskProbabilitySection(this.data),
       ],
+      numbering: configNumbering,
     });
 
     docx.Packer.toBuffer(doc).then((buffer) => {

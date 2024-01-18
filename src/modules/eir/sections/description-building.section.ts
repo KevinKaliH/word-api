@@ -46,7 +46,12 @@ export function historicalSection(dataObject: any) {
     textsTemplate.push(new docx.TextRun({ ...element }));
   });
 
-  return new docx.Paragraph({
-    children: textsTemplate,
-  });
+  return [
+    new docx.Paragraph({
+      text: "DESCRIPCIÓN DE LA EMPRESA",
+      heading: docx.HeadingLevel.HEADING_1,
+      pageBreakBefore: true,
+    }),
+    new docx.Paragraph({ children: textsTemplate }),
+  ];
 }
