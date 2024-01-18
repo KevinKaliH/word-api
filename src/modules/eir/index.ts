@@ -8,6 +8,7 @@ import { areaRiskProbabilitySection } from "./sections/area-risk-probability.sec
 import { introductionSection } from "./sections/introduction.section";
 import { objectivesSection } from "./sections/objectives.section";
 import { configNumbering } from "./utils/config-docx";
+import { resultProbabilities } from "./sections/resultProbabilities.section";
 
 export default class EirDocx {
   private data: any = undefined;
@@ -26,9 +27,6 @@ export default class EirDocx {
           footers: {
             default: footer(this.data),
           },
-          properties: {
-            type: docx.SectionType.CONTINUOUS,
-          },
           children: [
             ...introductionSection(),
             ...objectivesSection(),
@@ -37,6 +35,15 @@ export default class EirDocx {
           ],
         },
         ...areaRiskProbabilitySection(this.data),
+        {
+          headers: {
+            default: header(),
+          },
+          footers: {
+            default: footer(this.data),
+          },
+          children: [...resultProbabilities(this.data)],
+        },
       ],
       numbering: configNumbering,
     });
