@@ -1,10 +1,6 @@
 import * as docx from "docx";
 import { FormatTextValue, getValue } from "../../../utils/json.util";
-import {
-  DOUBLE_SALT,
-  HISTORICAL_TITLES,
-  ONE_SALT,
-} from "../../../utils/titles";
+import { DOUBLE_SALT, HISTORICAL_TITLES, ONE_SALT } from "../../../utils/titles";
 
 export function historicalSection(dataObject: any) {
   const textsTemplate: docx.ParagraphChild[] = [];
@@ -34,8 +30,7 @@ export function historicalSection(dataObject: any) {
     } else {
       // one next line
       two.split(ONE_SALT).forEach((one, indexOne) => {
-        if (one.length > 0)
-          arrayContent.push({ text: one, break: indexOne == 0 ? 2 : 1 });
+        if (one.length > 0) arrayContent.push({ text: one, break: indexOne == 0 ? 2 : 1 });
       });
     }
 

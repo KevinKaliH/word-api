@@ -18,6 +18,8 @@ export default class EirDocx {
   }
 
   async generate() {
+    console.log(this.data);
+    
     const doc = new docx.Document({
       sections: [
         {

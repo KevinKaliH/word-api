@@ -9,7 +9,9 @@ export default class EirDocx {
   }
 
   async generate() {
-    const doc = new docx.Document({});
+    const doc = new docx.Document({
+      sections: [],
+    });
 
     docx.Packer.toBuffer(doc).then((buffer) => {
       fs.writeFileSync("My Document.docx", buffer);
